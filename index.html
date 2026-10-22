@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trumpet Vent - Instrumentos Musicales</title>
+<style>
+:root{--gold:#d4af37;--black:#1a1a1a;--light:#f4f4f4;--green:#25d366;--red:#c0392b}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif}
+html{scroll-behavior:smooth}body{background:var(--light);color:#333}
+header{background:var(--black);color:white;text-align:center;padding:25px 15px;border-bottom:4px solid var(--gold)}
+.logo-container{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.logo-icon{width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f3e5ab,var(--gold));font-size:1.4rem}
+header h1{font-size:clamp(1.8rem,5vw,2.6rem);letter-spacing:3px;background:linear-gradient(to right,#fff,var(--gold),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--gold);font-style:italic;margin-top:8px}
+.category-nav{background:#2b2b2b;padding:14px;text-align:center;border-bottom:2px solid var(--gold)}
+.category-nav span{color:white;font-weight:bold;margin-right:10px}
+.category-nav a{color:var(--gold);text-decoration:none;margin:5px 10px;font-weight:600;display:inline-block}
+.category-nav a:hover{color:white;text-decoration:underline}
+.promo-banner{background:linear-gradient(135deg,#c0392b,#e74c3c);color:white;text-align:center;padding:15px;font-weight:bold}
+.promo-banner span{background:white;color:#c0392b;padding:4px 10px;border-radius:20px;margin-right:8px}
+.hero{background:linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.8)),#333;color:white;text-align:center;padding:40px 20px}
+.hero h2{font-size:clamp(1.4rem,4vw,2rem);margin-bottom:10px}
+.container{max-width:1200px;margin:30px auto;padding:0 20px}
+.section-title{font-size:1.7rem;color:var(--black);margin:40px 0 20px;border-left:5px solid var(--gold);padding-left:10px;text-transform:uppercase}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:25px}
+.product-card{background:white;border-radius:9px;box-shadow:0 4px 15px #00000014;overflow:hidden;display:flex;flex-direction:column;position:relative;border:1px solid #eef0f2;transition:.25s}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 8px 25px #00000024}
+.discount-tag{position:absolute;top:10px;right:10px;background:var(--red);color:white;padding:5px 9px;font-size:.75rem;font-weight:bold;border-radius:4px;z-index:2}
+.product-image-placeholder{width:100%;height:220px;background:#eaeded;display:flex;align-items:center;justify-content:center;color:#666;overflow:hidden}
+.product-image-placeholder img{width:100%;height:100%;object-fit:contain}
+.product-info{padding:20px;text-align:center;flex:1;display:flex;flex-direction:column;gap:9px}
+.product-brand{font-size:.8rem;text-transform:uppercase;color:#888;letter-spacing:1px}
+.product-title{font-size:1.2rem;color:var(--black);min-height:48px;display:flex;align-items:center;justify-content:center}
+.product-price-container{margin:5px 0 10px}
+.product-price{font-size:1.5rem;font-weight:bold;color:#b12704}
+.old-price{font-size:1rem;text-decoration:line-through;color:#888;margin-right:8px}
+.btn-buy{background:var(--black);color:var(--gold);border:2px solid var(--gold);padding:12px 18px;border-radius:5px;cursor:pointer;font-weight:bold;width:100%;margin-top:auto}
+.btn-buy:hover{background:var(--gold);color:var(--black)}
+.badge-sucre{background:#cbd5e1;color:#1e293b;padding:5px 10px;border-radius:4px;font-size:.75rem;font-weight:bold;display:inline-block;align-self:center}
+.badge-low-price{background:#d1fae5;color:#065f46}
+.custom-request-section{background:linear-gradient(135deg,#111,#2b2b2b);border:2px solid var(--gold);border-radius:10px;padding:35px 20px;text-align:center;color:white;margin:50px auto;max-width:900px}
+.custom-request-section h3{color:var(--gold);font-size:1.7rem;margin-bottom:10px}
+.custom-request-section p{color:#ccc;margin:0 auto 20px;max-width:650px;line-height:1.5}
+.btn-whatsapp-custom{display:inline-block;background:var(--green);color:white;text-decoration:none;padding:14px 24px;border-radius:30px;font-weight:bold}
+.btn-whatsapp-custom:hover{background:#1ebd56}
+.ad-space{background:white;border:2px dashed var(--gold);border-radius:8px;padding:20px;text-align:center;margin:40px auto;color:#555}
+.modal{display:none;position:fixed;inset:0;background:#000000bf;z-index:1000;justify-content:center;align-items:center;padding:15px}
+.modal-content{background:white;padding:28px;border-radius:10px;max-width:750px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
+.close-modal{position:absolute;top:10px;right:18px;font-size:2rem;cursor:pointer;color:#666}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:20px}
+.form-group{margin-bottom:13px}
+.form-group label{display:block;margin-bottom:5px;font-weight:600;font-size:.9rem}
+.form-group input,.form-group select{width:100%;padding:11px;border:1px solid #ccc;border-radius:5px;font-size:1rem}
+.btn-submit{background:#27ae60;color:white;border:0;padding:13px;width:100%;border-radius:5px;font-size:1rem;cursor:pointer;font-weight:bold;margin-top:8px}
+.btn-submit:hover{background:#219653}
+footer{background:var(--black);color:#aaa;text-align:center;padding:35px 15px;margin-top:60px;border-top:2px solid var(--gold)}
+footer p{margin:8px 0}
+@media(max-width:650px){.modal-grid{grid-template-columns:1fr}.modal-content{padding:24px 18px}.category-nav span{display:block;margin-bottom:7px}.product-image-placeholder{height:200px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo-container"><div class="logo-icon">🎺</div><h1>Trumpet Vent</h1></div>
+  <p>Garantía, Brillo y Tradición Musical en la Capital de Bolivia</p>
+</header>
+<nav class="category-nav">
+  <span>Catálogo Rápido:</span>
+  <a href="#trompetas">Trompetas</a><a href="#baritonos">Barítonos</a><a href="#accesorios">Accesorios</a>
+</nav>
+<div class="promo-banner"><span>¡Oferta!</span> ¡10% de descuento adicional en pagos al contado! Consulta disponibilidad y condiciones.</div>
+<section class="hero">
+  <h2>Catálogo de Instrumentos y Accesorios en Sucre</h2>
+  <p>Opciones para estudiantes, bandas y músicos profesionales.</p>
+</section>
+<main class="container">
+<h2 id="trompetas" class="section-title">🎺 Trompetas</h2>
+<div class="products-grid">
+  <article class="product-card"><span class="discount-tag">-15% OFF</span><div class="product-image-placeholder"><img src="https://imgs.search.brave.com/cQQH4WqSHS1Sqp9xBg5dXNvnO2xQoeJvQ3CZvG4MB4M/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/Lzcxa3V2M1pCWXFM/LmpwZw" alt="Trompeta escolar" loading="lazy"></div><div class="product-info"><span class="badge-sucre badge-low-price">💰 Opción económica</span><p class="product-brand">SG / Genérica</p><h3 class="product-title">Trompeta de Iniciación Escolar Bb</h3><div class="product-price-container"><span class="old-price">1.450 Bs.</span><span class="product-price">1.250 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('Trompeta de Iniciación Escolar Bb','1.250 Bs.','Alternativa económica para estudiantes y bandas escolares. Acabado lacado dorado y estuche.')">Comprar Ahora</button></div></article>
+  <article class="product-card"><div class="product-image-placeholder"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxl8prhcJgKrwU7pisgb9jW9QoFBwtocOjTHB-ZBJZJg&s=10" alt="J Michael TR-300" loading="lazy"></div><div class="product-info"><span class="badge-sucre badge-low-price">Excelente precio</span><p class="product-brand">J. Michael / Stagg</p><h3 class="product-title">J. Michael TR-300 / Stagg Bb</h3><div class="product-price-container"><span class="product-price">1.980 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('J. Michael TR-300 / Stagg Bb','1.980 Bs.','Trompeta de iniciación para estudiantes. Incluye boquilla estándar y accesorios de limpieza, según disponibilidad.')">Comprar Ahora</button></div></article>
+  <article class="product-card"><span class="discount-tag">Popular</span><div class="product-image-placeholder"><img src="https://imgs.search.brave.com/bz6R63tm6cQl46Xrdk9539OVJycwGvwxWWRxuE6MHWc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLmVi/YXlpbWcuY29tL2lt/YWdlcy9nL0pQRUFB/T1N3UGhGbXZzdTcv/cy1sMjI1LmpwZw" alt="Yamaha YTR-2330" loading="lazy"></div><div class="product-info"><span class="badge-sucre">Para estudiantes</span><p class="product-brand">Yamaha</p><h3 class="product-title">Yamaha YTR-2330</h3><div class="product-price-container"><span class="product-price">3.850 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('Yamaha YTR-2330','3.850 Bs.','Trompeta de estudio conocida por su facilidad de ejecución y afinación estable. Verificar disponibilidad.')">Comprar Ahora</button></div></article>
+  <article class="product-card"><div class="product-image-placeholder"><img src="https://imgs.search.brave.com/-ShC3kzKGOoL9ipQUDTBLyYWwqf2h0lJF_oNvtvwSck/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMtbXVzaXRlY2gu/Zmx1eG9jb3JlLmNv/bS92MS9wcm9fNTk1/ODBfbS5qcGc" alt="Jupiter JTR-700Q" loading="lazy"></div><div class="product-info"><span class="badge-sucre">Calidad y precio</span><p class="product-brand">Jupiter</p><h3 class="product-title">Jupiter JTR-700Q Intermediate</h3><div class="product-price-container"><span class="product-price">4.200 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('Jupiter JTR-700Q Intermediate','4.200 Bs.','Modelo de nivel intermedio. Consulta las especificaciones y la disponibilidad antes de comprar.')">Comprar Ahora</button></div></article>
+  <article class="product-card"><div class="product-image-placeholder"><img src="https://imgs.search.brave.com/JChLMPkQNA1_NhPqjDTVVWnR1sMyvoXVfS4wiLfe1ds/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9maXh0/dXJlc211c2ljYWxp/bnN0cnVtZW50cy5j/b20vd3AtY29udGVu/dC9waWNzL0Nvbm5f/NTJCU1BfQ09OTnN0/ZWxsYXRpb25fU2Vy/aWVzX0JiX1RydW1w/ZXRfMTk0NzQ0NDUw/MzAzX09CXzAyX3dw/aC5qcGc" alt="Conn 52BSP" loading="lazy"></div><div class="product-info"><span class="badge-sucre">Sonido robusto</span><p class="product-brand">C. G. Conn</p><h3 class="product-title">Conn 52BSP Constellation</h3><div class="product-price-container"><span class="product-price">11.900 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('Conn 52BSP Constellation','11.900 Bs.','Modelo para músicos avanzados. Confirma el modelo exacto, estado y disponibilidad.')">Comprar Ahora</button></div></article>
+  <article class="product-card"><span class="discount-tag">Premium</span><div class="product-image-placeholder"><img src="https://imgs.search.brave.com/Je8DKQDs74dnl_K-i1jr9KN1NtQO6Xzry2r1AvJ7nmA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9rZXNz/bGVyYW5kc29ucy5j/b20vd3AtY29udGVu/dC91cGxvYWRzL25l/dy1iYWNoLXN0cmFk/LTE4MHMzNy10cnVt/cGV0LmpwZw" alt="Bach Stradivarius 180S37" loading="lazy"></div><div class="product-info"><span class="badge-sucre">Gama profesional</span><p class="product-brand">Vincent Bach</p><h3 class="product-title">Bach Stradivarius 180S37 Silver</h3><div class="product-price-container"><span class="product-price">21.500 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('Bach Stradivarius 180S37 Silver','21.500 Bs.','Trompeta de gama profesional. Verifica acabado, autenticidad y disponibilidad con el vendedor.')">Comprar Ahora</button></div></article>
+</div>
+<h2 id="baritonos" class="section-title">🎷 Barítonos</h2>
+<div class="products-grid">
+  <article class="product-card"><div class="product-image-placeholder"><img src="https://imgs.search.brave.com/-frWMVfFeDdg1kqgnya9vMADiKQ-FQ5p6G9kfxjOc5k/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLmVi/YXlpbWcuY29tL2lt/YWdlcy9nLzJkUUFB/ZVN3RUNocWJvcVYv/cy1sNDAwLndlYnA" alt="Barítono escolar" loading="lazy"></div><div class="product-info"><span class="badge-sucre">Ideal para bandas</span><p class="product-brand">Yamaha / Stagg</p><h3 class="product-title">Barítono Escolar de 3 Pistones Bb</h3><div class="product-price-container"><span class="product-price">3.950 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('Barítono Escolar de 3 Pistones Bb','3.950 Bs.','Barítono para bandas estudiantiles. Confirma marca y accesorios incluidos.')">Comprar Ahora</button></div></article>
+  <article class="product-card"><span class="discount-tag">Pro</span><div class="product-image-placeholder"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfX5VVzm77z1XGj21-D2rSsGBYGqa7RyEM9sKu6PxqIA&s=10" alt="Barítono profesional" loading="lazy"></div><div class="product-info"><span class="badge-sucre">Gama profesional</span><p class="product-brand">Jupiter / Besson</p><h3 class="product-title">Barítono Profesional de 4 Pistones</h3><div class="product-price-container"><span class="product-price">8.500 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('Barítono Profesional de 4 Pistones','8.500 Bs.','Instrumento de gama alta con sistema de cuatro pistones. Confirma modelo y disponibilidad.')">Comprar Ahora</button></div></article>
+</div>
+<h2 id="accesorios" class="section-title">⚙️ Accesorios y Complementos</h2>
+<div class="products-grid">
+  <article class="product-card"><div class="product-image-placeholder"><img src="https://imgs.search.brave.com/ayhn_ZzGUypQ2ErIN6A9JvO55zllnyPoFqHaYvgA3vk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NjFrbXIrK1hYZkwu/anBn" alt="Boquilla para trompeta" loading="lazy"></div><div class="product-info"><span class="badge-sucre">Indispensable</span><p class="product-brand">Bach / Yamaha / Schilke</p><h3 class="product-title">Boquilla para Trompeta (3C / 7C)</h3><div class="product-price-container"><span class="product-price">350 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('Boquilla para Trompeta (3C / 7C)','350 Bs.','Boquilla para trompeta. Confirma la medida y compatibilidad con tu instrumento.')">Comprar Ahora</button></div></article>
+  <article class="product-card"><div class="product-image-placeholder"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjFG7Imoy7XEmV7tnTggvEfiVcfqodVAuZbUhjaEVt2A&s=10" alt="Aceite para pistones" loading="lazy"></div><div class="product-info"><span class="badge-sucre">Mantenimiento</span><p class="product-brand">Al Cass / Hetman / Yamaha</p><h3 class="product-title">Aceite Lubricante para Pistones</h3><div class="product-price-container"><span class="product-price">65 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('Aceite Lubricante para Pistones','65 Bs.','Aceite para mantener el movimiento suave de los pistones. Usa lubricante apropiado para tu instrumento.')">Comprar Ahora</button></div></article>
+  <article class="product-card"><div class="product-image-placeholder"><img src="https://imgs.search.brave.com/rEexKXlD-nayS0GZ6N5JiT7Bt9Y2X9vdlZh3iBjFL4Y/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzExOG9aOHM5dEwu/anBn" alt="Guantes blancos" loading="lazy"></div><div class="product-info"><span class="badge-sucre">Presentación y cuidado</span><p class="product-brand">Trumpet Vent Gear</p><h3 class="product-title">Guantes Blancos de Algodón (Par)</h3><div class="product-price-container"><span class="product-price">35 Bs.</span></div><button class="btn-buy" onclick="abrirCompra('Guantes Blancos de Algodón (Par)','35 Bs.','Par de guantes blancos para presentaciones y desfiles de bandas.')">Comprar Ahora</button></div></article>
+</div>
+<div class="ad-space"><h4>Anuncio</h4><p>¿Buscas kits de limpieza, varillas o boquillas especiales? Consulta por disponibilidad.</p></div>
+<section class="custom-request-section">
+<h3>¿Buscas otra marca o modelo?</h3>
+<p>Consulta por otras marcas, modelos y acabados. Atendemos pedidos sujetos a disponibilidad.</p>
+<a href="https://wa.me/59173439002?text=Hola%20Trumpet%20Vent%2C%20busco%20otra%20marca%20o%20modelo." target="_blank" rel="noopener" class="btn-whatsapp-custom">💬 Consultar por WhatsApp</a>
+</section>
+</main>
+<div id="modalCompra" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-content">
+<span class="close-modal" onclick="cerrarCompra()" aria-label="Cerrar">&times;</span>
+<h2 id="modalTitle" style="color:#1a1a1a;padding-right:25px">Nombre del producto</h2>
+<p id="modalPrice" style="font-size:1.5rem;color:#b12704;font-weight:bold;margin:10px 0"></p>
+<div class="modal-grid">
+<div><h3>Detalles del producto</h3><p id="modalDescription" style="color:#555;line-height:1.5;margin-top:10px"></p>
+<div style="margin-top:20px;font-size:.85rem;color:#666;border-top:1px dashed #ccc;padding-top:12px">
+<p>📍 <strong>Entrega local:</strong> coordinar por WhatsApp.</p><p>🇧🇴 <strong>Envíos:</strong> consultar cobertura y costo.</p><p>🛡️ <strong>Soporte:</strong> consultar condiciones de garantía.</p>
+</div></div>
+<div><h3>Datos del pedido</h3>
+<form id="formCompra">
+<div class="form-group"><label for="nombre">Nombre completo:</label><input type="text" id="nombre" autocomplete="name" required placeholder="Ej. Juan Pérez"></div>
+<div class="form-group"><label for="telefono">Número de celular:</label><input type="tel" id="telefono" autocomplete="tel" required placeholder="Ej. 71234567"></div>
+<div class="form-group"><label for="ciudad">Zona / Dirección:</label><input type="text" id="ciudad" autocomplete="street-address" required placeholder="Ej. Zona Central, Sucre"></div>
+<div class="form-group"><label for="pago">Método de pago preferido:</label><select id="pago" required><option value="Transferencia bancaria / QR">Transferencia bancaria / QR</option><option value="Efectivo contra entrega (consultar cobertura)">Efectivo contra entrega (consultar cobertura)</option><option value="Tigo Money">Tigo Money</option></select></div>
+<button type="submit" class="btn-submit">Confirmar pedido por WhatsApp</button>
+</form>
+</div></div></div></div>
+<footer><p>&copy; 2026 Trumpet Vent - Sucre, Bolivia.</p><p>Precios expresados en bolivianos (Bs.). Confirma precios y disponibilidad antes de comprar.</p><p>📍 Ubicación: Azari</p><p>📞 WhatsApp: 73439002</p></footer>
+<script>
+const modal = document.getElementById('modalCompra');
+const modalTitle = document.getElementById('modalTitle');
+const modalPrice = document.getElementById('modalPrice');
+const modalDescription = document.getElementById('modalDescription');
+
+function abrirCompra(nombre, precio, descripcion) {
+  modalTitle.textContent = nombre;
+  modalPrice.textContent = precio;
+  modalDescription.textContent = descripcion;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function cerrarCompra() {
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+  document.getElementById('formCompra').reset();
+}
+window.addEventListener('click', function(event) {
+  if (event.target === modal) cerrarCompra();
+});
+window.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape' && modal.style.display === 'flex') cerrarCompra();
+});
+document.getElementById('formCompra').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const nombre = document.getElementById('nombre').value.trim();
+  const telefono = document.getElementById('telefono').value.trim();
+  const direccion = document.getElementById('ciudad').value.trim();
+  const pago = document.getElementById('pago').value;
+  if (!nombre || !telefono || !direccion) {
+    alert('Por favor, completa todos los campos requeridos.');
+    return;
+  }
+  const numeroWhatsApp = '59173439002';
+  const mensaje = '¡Hola Trumpet Vent! Quiero confirmar mi pedido. | PRODUCTO: ' + modalTitle.textContent + ' | PRECIO: ' + modalPrice.textContent + ' | DATOS DEL CLIENTE: Nombre: ' + nombre + ' | Celular: ' + telefono + ' | Dirección/Zona: ' + direccion + ' | Método de pago: ' + pago + ' | Por favor, confirmen la disponibilidad y los detalles de entrega. ¡Gracias!';
+  const enlace = 'https://wa.me/' + numeroWhatsApp + '?text=' + encodeURIComponent(mensaje);
+  const ventana = window.open(enlace, '_blank');
+  if (!ventana) window.location.href = enlace;
+  cerrarCompra();
+});
+</script>
+</body>
+</html>
